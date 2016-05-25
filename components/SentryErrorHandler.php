@@ -68,10 +68,22 @@ class SentryErrorHandler extends CErrorHandler
      * Handles the exception.
      * @param Exception $exception the exception captured.
      */
-    protected function handleException($exception)
+    protected function handleException(Exception $exception)
     {
-        $this->getSentryClient()->captureException($exception);
+        if ($this->shouldReport($exception)) {
+            $this->getSentryClient()->captureException($exception);
+        }
         parent::handleException($exception);
+    }
+
+    /**
+     * Determine if error should be reported to Sentry
+     * @param Exception $e
+     * @return bool
+     */
+    protected function shouldReport(Exception $e)
+    {
+        return true;
     }
 
     /**
@@ -99,4 +111,4 @@ class SentryErrorHandler extends CErrorHandler
         }
         return Yii::app()->getComponent($this->sentryClientID);
     }
-} 
+}
