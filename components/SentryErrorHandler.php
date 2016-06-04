@@ -68,7 +68,7 @@ class SentryErrorHandler extends CErrorHandler
      * Handles the exception.
      * @param Exception $exception the exception captured.
      */
-    protected function handleException(Exception $exception)
+    protected function handleException($exception)
     {
         if ($this->shouldReport($exception)) {
             $this->getSentryClient()->captureException($exception);
