@@ -78,10 +78,10 @@ class SentryErrorHandler extends CErrorHandler
 
     /**
      * Determine if error should be reported to Sentry
-     * @param Exception $e
+     * @param $e
      * @return bool
      */
-    protected function shouldReport(Exception $e)
+    protected function shouldReport($e)
     {
         return true;
     }
